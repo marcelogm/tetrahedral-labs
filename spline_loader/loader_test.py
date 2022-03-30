@@ -1,23 +1,23 @@
 import unittest
 import numpy as np
-from load_spline.loader import SplineLoader
+from spline_loader.loader import SplineLoader
 
 class SplineLoaderTest(unittest.TestCase):
 
     def test_must_load_spline_file(self):
         # when
-        spline = SplineLoader().load("load_spline/spline.txt")
+        spline = SplineLoader().load("spline_loader/spline.txt")
 
         # then
         self.assertTrue(len(spline.get_control_points()) > 0)
 
     def test_must_raise_exception_on_invalid_file_format(self):
-        with self.assertRaisesRegex(Exception, 'Não foi possível extrair pontos do arquivo load_spline/not_spline.txt'):
-            SplineLoader().load("load_spline/not_spline.txt")
+        with self.assertRaisesRegex(Exception, 'Não foi possível extrair pontos do arquivo spline_loader/not_spline.txt'):
+            SplineLoader().load("spline_loader/not_spline.txt")
             
     def test_must_extract_all_control_points(self):
         # when
-        spline = SplineLoader().load("load_spline/spline.txt")
+        spline = SplineLoader().load("spline_loader/spline.txt")
 
         # then
         control_points = spline.get_control_points()
@@ -31,7 +31,7 @@ class SplineLoaderTest(unittest.TestCase):
 
     def test_must_extract_all_direction_points(self):
         # when
-        spline = SplineLoader().load("load_spline/spline.txt")
+        spline = SplineLoader().load("spline_loader/spline.txt")
 
         # then
         directions = spline.get_direction_points_from_cp(0)
