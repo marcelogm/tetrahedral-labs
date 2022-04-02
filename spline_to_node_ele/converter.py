@@ -46,11 +46,26 @@ class Converter:
     def __create_cuboid(self, i, l, r):
         nodes = []
         A, B, C, D, E, F, G, H = self.__extract_cuboid_index(i, l, r)
-        nodes.append([ A, C, D, G ])
-        nodes.append([ A, D, F, G ])
-        nodes.append([ D, F, G, H ])
-        nodes.append([ A, E, F, G ])
-        nodes.append([ A, B, D, F ])
+        #
+        #  Using l   Using i
+        #   __ __    __ __
+        #  | /|\ |  | /| /|
+        #  |/_|_\|  |/_|/_|
+        #  | /|\ |  |\ |\ |
+        #  |/_|_\|  |_\|_\|
+        #
+        if (l % 2 == 0):
+            nodes.append([ A, C, D, G ])
+            nodes.append([ A, D, F, G ])
+            nodes.append([ D, F, G, H ])
+            nodes.append([ A, E, F, G ])
+            nodes.append([ A, B, D, F ])
+        else:
+            nodes.append([ A, B, C, E ])
+            nodes.append([ C, E, G, H ])
+            nodes.append([ B, C, D, H ])
+            nodes.append([ B, C, E, H ])
+            nodes.append([ B, E, F, H ])
         return nodes
 
     def __extract_cuboid_index(self, i, l, r):
