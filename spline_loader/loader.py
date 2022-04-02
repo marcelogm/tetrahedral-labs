@@ -13,6 +13,12 @@ class Spline:
     def get_direction_points_from_cp(self, control_point_index) -> np.ndarray:
         return self.__direction_points[control_point_index]
 
+    def get_length(self) -> int:
+        return len(self.__control_points)
+
+    def get_directions_count(self) -> int:
+        return len(self.__direction_points[0])
+
 class SplineLoader:
 
     def load(self, path: str) -> Spline:
