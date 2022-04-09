@@ -29,10 +29,11 @@ class Converter:
     def __create_cuboid_structure(self, spline: Spline):
         nodes = []
         direction_count = spline.get_directions_count()
+        count_length = (direction_count * 2)
         for i in range(spline.get_length() - 1):
             for j in range(direction_count - 1):
-                nodes.extend(self.__create_cuboid(i, j, j))
-            nodes.extend(self.__create_cuboid(i, 0, direction_count - 2))
+                nodes.extend(self.__create_cuboid(i, j, j, count_length))
+            nodes.extend(self.__create_cuboid(i, 0, direction_count - 2, count_length))
         return nodes
 
     #    E ----- F  ← top
@@ -43,34 +44,49 @@ class Converter:
     # C ----- D     ← bottom
     # ↑       ↑
     # left    right
-    def __create_cuboid(self, i, l, r):
+    def __create_cuboid(self, i, l, r, length):
         nodes = []
-        A, B, C, D, E, F, G, H = self.__extract_cuboid_index(i, l, r)
+        A, B, C, D, E, F, G, H = self.__extract_cuboid_index(i, l, r, length)
         #
-        #  Using l   Using i
-        #   __ __    __ __
-        #  | /|\ |  | /| /|
-        #  |/_|_\|  |/_|/_|
-        #  | /|\ |  |\ |\ |
-        #  |/_|_\|  |_\|_\|
+        #  Using l   Using i   Using both
+        #   __ __     __ __     __ __   
+        #  | /|\ |   | /| /|   | /|\ |
+        #  |/_|_\|   |/_|/_|   |/_|_\|
+        #  | /|\ |   |\ |\ |   |\ | /|
+        #  |/_|_\|   |_\|_\|   |_\|/_|
         #
         if (l % 2 == 0):
-            nodes.append([ A, C, D, G ])
-            nodes.append([ A, D, F, G ])
-            nodes.append([ D, F, G, H ])
-            nodes.append([ A, E, F, G ])
-            nodes.append([ A, B, D, F ])
+            # DRY IT
+            if (i % 2 == 0):
+                nodes.append([ A, C, D, G ])
+                nodes.append([ A, D, F, G ])
+                nodes.append([ D, F, G, H ])
+                nodes.append([ A, E, F, G ])
+                nodes.append([ A, B, D, F ])
+            else:
+                nodes.append([ A, B, C, E ])
+                nodes.append([ C, E, G, H ])
+                nodes.append([ B, C, D, H ])
+                nodes.append([ B, C, E, H ])
+                nodes.append([ B, E, F, H ])
         else:
-            nodes.append([ A, B, C, E ])
-            nodes.append([ C, E, G, H ])
-            nodes.append([ B, C, D, H ])
-            nodes.append([ B, C, E, H ])
-            nodes.append([ B, E, F, H ])
+            if (i % 2 == 1):
+                nodes.append([ A, C, D, G ])
+                nodes.append([ A, D, F, G ])
+                nodes.append([ D, F, G, H ])
+                nodes.append([ A, E, F, G ])
+                nodes.append([ A, B, D, F ])
+            else:
+                nodes.append([ A, B, C, E ])
+                nodes.append([ C, E, G, H ])
+                nodes.append([ B, C, D, H ])
+                nodes.append([ B, C, E, H ])
+                nodes.append([ B, E, F, H ])
         return nodes
 
-    def __extract_cuboid_index(self, i, l, r):
-        bottom = i * 64
-        top = (i + 1) * 64
+    def __extract_cuboid_index(self, i, l, r, length):
+        bottom = i * length
+        top = (i + 1) * length
         left = (l * 2)
         right = (r * 2)
 

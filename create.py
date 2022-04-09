@@ -5,7 +5,7 @@ from node_creator.node_file_creator import NodeEleFileCreator
 def main():
     spline = SplineLoader().load("spline_loader/spline.txt")
     converter = Converter(NodeEleFileCreator())
-    converter.apply(spline, 1.5)
+    converter.apply(spline, 1.2)
 
 if __name__ == "__main__":
     main()
