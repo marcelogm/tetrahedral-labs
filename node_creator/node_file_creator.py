@@ -19,3 +19,12 @@ class NodeEleFileCreator:
         for i in range(len(arr)):
             file.write("%d %d %d %d %d\n" %(i, arr[i][0], arr[i][1], arr[i][2], arr[i][3]))
         file.close()
+
+    def create_collision_face_normal(self, arr, output_name):
+        file = open(output_name + ".face", "w+")
+        file.write("# Face count, list of nodes, no attribute \n")
+        file.write("%d %d %d\n" %(len(arr), 3, 0))
+        file.write("# Index, node index \n")
+        for i in range(len(arr)):
+            file.write("%d %d %d %d\n" %(i, arr[i][0], arr[i][1], arr[i][2]))
+        file.close()
