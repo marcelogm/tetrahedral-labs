@@ -58,30 +58,30 @@ class Converter:
         if (l % 2 == 0):
             # DRY IT
             if (i % 2 == 0):
-                nodes.append([ A, C, D, G ])
-                nodes.append([ A, D, F, G ])
-                nodes.append([ D, F, G, H ])
-                nodes.append([ A, E, F, G ])
+                nodes.append([ A, D, C, G ])
                 nodes.append([ A, B, D, F ])
+                nodes.append([ A, F, D, G ])
+                nodes.append([ F, E, G, A ])
+                nodes.append([ F, G, H, D ])
             else:
                 nodes.append([ A, B, C, E ])
-                nodes.append([ C, E, G, H ])
-                nodes.append([ B, C, D, H ])
+                nodes.append([ B, D, C, H ])
                 nodes.append([ B, C, E, H ])
-                nodes.append([ B, E, F, H ])
+                nodes.append([ F, E, H, B ])
+                nodes.append([ E, G, H, C ])
         else:
             if (i % 2 == 1):
-                nodes.append([ A, C, D, G ])
-                nodes.append([ A, D, F, G ])
-                nodes.append([ D, F, G, H ])
-                nodes.append([ A, E, F, G ])
+                nodes.append([ A, D, C, G ])
                 nodes.append([ A, B, D, F ])
+                nodes.append([ A, F, D, G ])
+                nodes.append([ F, E, G, A ])
+                nodes.append([ F, G, H, D ])
             else:
                 nodes.append([ A, B, C, E ])
-                nodes.append([ C, E, G, H ])
-                nodes.append([ B, C, D, H ])
+                nodes.append([ B, D, C, H ])
                 nodes.append([ B, C, E, H ])
-                nodes.append([ B, E, F, H ])
+                nodes.append([ F, E, H, B ])
+                nodes.append([ E, G, H, C ])
         return nodes
 
     def __extract_cuboid_index(self, i, l, r, length):
