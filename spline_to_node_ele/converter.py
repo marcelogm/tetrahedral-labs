@@ -58,30 +58,30 @@ class Converter:
         if (l % 2 == 0):
             # DRY IT
             if (i % 2 == 0):
-                nodes.append([ A, D, C, G ])
-                nodes.append([ A, B, D, F ])
-                nodes.append([ A, F, D, G ])
-                nodes.append([ F, E, G, A ])
-                nodes.append([ F, G, H, D ])
+                nodes.append([ A, D, C, G,  1 ])
+                nodes.append([ A, B, D, F,  1 ])
+                nodes.append([ A, F, D, G,  0 ])
+                nodes.append([ F, E, G, A, -1 ])
+                nodes.append([ F, G, H, D, -1 ])
             else:
-                nodes.append([ A, B, C, E ])
-                nodes.append([ B, D, C, H ])
-                nodes.append([ B, C, E, H ])
-                nodes.append([ F, E, H, B ])
-                nodes.append([ E, G, H, C ])
+                nodes.append([ A, B, C, E,  1 ])
+                nodes.append([ B, D, C, H,  1 ])
+                nodes.append([ B, C, E, H,  0 ])
+                nodes.append([ F, E, H, B, -1 ])
+                nodes.append([ E, G, H, C, -1 ])
         else:
             if (i % 2 == 1):
-                nodes.append([ A, D, C, G ])
-                nodes.append([ A, B, D, F ])
-                nodes.append([ A, F, D, G ])
-                nodes.append([ F, E, G, A ])
-                nodes.append([ F, G, H, D ])
+                nodes.append([ A, D, C, G,  1 ])
+                nodes.append([ A, B, D, F,  1 ])
+                nodes.append([ A, F, D, G,  0 ])
+                nodes.append([ F, E, G, A, -1 ])
+                nodes.append([ F, G, H, D, -1 ])
             else:
-                nodes.append([ A, B, C, E ])
-                nodes.append([ B, D, C, H ])
-                nodes.append([ B, C, E, H ])
-                nodes.append([ F, E, H, B ])
-                nodes.append([ E, G, H, C ])
+                nodes.append([ A, B, C, E,  1 ])
+                nodes.append([ B, D, C, H,  1 ])
+                nodes.append([ B, C, E, H,  0 ])
+                nodes.append([ F, E, H, B, -1 ])
+                nodes.append([ E, G, H, C, -1 ])
         return nodes
 
     def __extract_cuboid_index(self, i, l, r, length):

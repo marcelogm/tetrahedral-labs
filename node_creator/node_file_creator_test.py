@@ -30,8 +30,8 @@ class NodeEleFileCreatorTest(unittest.TestCase):
         # given
         filename = "node_creator/output"
         arr = np.array([
-            [ 1, 2, 3, 4 ],
-            [ 5, 6, 7, 8 ]
+            [ 1, 2, 3, 4, 1 ],
+            [ 5, 6, 7, 8, 0 ]
         ])
 
         # when
@@ -40,10 +40,10 @@ class NodeEleFileCreatorTest(unittest.TestCase):
         # then
         file = open(filename + ".ele", mode='r')
         self.assertEqual("# Node count, 4 corners, no attribute\n", file.readline())
-        self.assertEqual("2 4 0\n", file.readline())
+        self.assertEqual("2 4 1\n", file.readline())
         self.assertEqual("# Node index, corner indexes\n", file.readline())
-        self.assertEqual("0 1 2 3 4\n", file.readline())
-        self.assertEqual("1 5 6 7 8\n", file.readline())
+        self.assertEqual("0 1 2 3 4 1\n", file.readline())
+        self.assertEqual("1 5 6 7 8 0\n", file.readline())
         file.close()
 
     def test_must_create_a_face_file_from_node_array(self):
