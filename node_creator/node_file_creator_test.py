@@ -30,8 +30,8 @@ class NodeEleFileCreatorTest(unittest.TestCase):
         # given
         filename = "node_creator/output"
         arr = np.array([
-            [ 1, 2, 3, 4 ],
-            [ 5, 6, 7, 8 ]
+            [ 1, 2, 3, 4, 1 ],
+            [ 5, 6, 7, 8, 0 ]
         ])
 
         # when
@@ -40,8 +40,28 @@ class NodeEleFileCreatorTest(unittest.TestCase):
         # then
         file = open(filename + ".ele", mode='r')
         self.assertEqual("# Node count, 4 corners, no attribute\n", file.readline())
-        self.assertEqual("2 4 0\n", file.readline())
+        self.assertEqual("2 4 1\n", file.readline())
         self.assertEqual("# Node index, corner indexes\n", file.readline())
-        self.assertEqual("0 1 2 3 4\n", file.readline())
-        self.assertEqual("1 5 6 7 8\n", file.readline())
+        self.assertEqual("0 1 2 3 4 1\n", file.readline())
+        self.assertEqual("1 5 6 7 8 0\n", file.readline())
+        file.close()
+
+    def test_must_create_a_face_file_from_node_array(self):
+        # given
+        filename = "node_creator/output"
+        arr = np.array([
+            [ 1, 2, 3 ],
+            [ 4, 5, 6 ]
+        ])
+
+        # when
+        NodeEleFileCreator().create_collision_face_normal(arr, filename)
+
+        # then
+        file = open(filename + ".face", mode='r')
+        self.assertEqual("# Face count, list of nodes, no attribute \n", file.readline())
+        self.assertEqual("2 3 0\n", file.readline())
+        self.assertEqual("# Index, node index \n", file.readline())
+        self.assertEqual("0 1 2 3\n", file.readline())
+        self.assertEqual("1 4 5 6\n", file.readline())
         file.close()
